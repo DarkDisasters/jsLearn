@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 對於 == 來說，如果對比雙方的類型不一樣的話，就會進行類型轉換，這也就用到了我們上一章節講的內容。
+
+        // 假如我們需要對比 x 和 y 是否相同，就會進行如下判斷流程：
+
+        // 1. 首先會判斷兩者類型是否相同。相同的話就是比大小了
+
+        // 2. 類型不相同的話，那麼就會進行類型轉換
+
+        // 3. 會先判斷是否在對比 null 和 undefined，是的話就會返回 true
+
+        // 4. 判斷兩者類型是否為 string 和 number，是的話就會將字符串轉換為 number
+         1 == '1'
+         1 == 1
+
+        // 8. 判斷其中一方是否為 boolean，是的話就會把 boolean 轉為 number 再進行判斷
+        '1' == true
+        '1' == 1
+
+        // 如果一个操作数是对象，另一个操作数不是，则调用对象的valueOf()方法，如果得到的值不是基本类型值，
+        // 则基于返回值再调用toString方法（这个过程即ToPrimitive），用得到的基本类型值按照前面的规则进行比较
+        '1' == { name: 'yck' }
+        '1' == '[object Object]'
+
+        // 如果两个操作数都是对象，则比较他们是不是同一个对象。如果两个操作数指向同一个对象，则相等操作符返回true, 否则返回false。
+
+        // null 和 undefined 是相等的。
+
+        // 要比较相等性之前，不能将null和undefined转换成其他任何值
+
+        // 如果有一个操作数是NaN，则相等操作符返回false, 而不相等操作符则返回true, NaN != NaN
+
+        [] == []  //false
+        [] == ![] //true
+
+    </script>
+</body>
+</html>

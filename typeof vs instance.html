@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // typeof 對於原始類型來說，除了 null 都可以顯示正確的類型
+        typeof 1 // 'number'
+        typeof '1' // 'string'
+        typeof undefined // 'undefined'
+        typeof true // 'boolean'
+        typeof Symbol() // 'symbol'
+        // typeof 對於對象來說，除了函數都會顯示 object，所以說 typeof 並不能準確判斷變量到底是什麼類型
+        typeof [] // 'object'
+        typeof {} // 'object'
+        typeof console.log // 'function'
+
+
+        const Person = function() {}
+        const p1 = new Person()
+        p1 instanceof
+        Person // true
+        var str = 'hello world'
+        str instanceof
+        String // false
+        var str1 = new String('hello world')
+        str1 instanceof
+        String // true
+
+        // Symbol.hasInstance 是什麼東西，其實就是一個能讓我們自定義 instanceof 行為的東西，以上代碼等同於 typeof ‘hello world’ === ‘string’，所以結果自然是 true 了
+        class PrimitiveString{
+            static[Symbol.hasInstance](x){
+                return typeof x === 'string'
+            }
+        }
+        console.log('hello world' instanceof PrimitiveString)
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // js中类型转换只有三种，
+        // 转Boolean，转数字，转字符串    
+
+        // 条件判读时候，除了
+        // undefined，null，false，NaN,",0,-0
+        // 其余值都转为true
+
+
+        // 四则运算符
+        // 運算中其中一方為字符串，那麼就會把另一方也轉換為字符串
+        // 如果一方不是字符串或者數字，那麼會將它轉換為數字或者字符串
+        1 + '1' // '11'
+        true + true // 2
+        4 + [1,2,3] //"41,2,3"
+    
+        // 因為 + ‘b’ 等於 NaN，所以結果為 “aNaN”，你可能也會在一些代碼中看到過 + ‘1’ 的形式來快速獲取 number 類型。
+        'a' + + 'b' // -> "aNaN"
+
+        // 對於除了加法的運算符來說，只要其中一方是數字，那麼另一方就會被轉為數字
+        4 * '3' // 12
+        4 * [] // 0
+        4 * [1, 2] // NaN
+
+
+        //比较运算符
+        // 1. 如果是對象，就通過 toPrimitive 轉換對象
+        // 2. 如果是字符串，就通過 unicode 字符索引來比較
+    </script>
+</body>
+</html>

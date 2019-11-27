@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 閉包的定義其實很簡單：函數 A 內部有一個函數 B，函數 B 可以訪問到函數 A 中的變量，那麼函數 B 就是閉包。
+        // 很多人對於閉包的解釋可能是函數嵌套了函數，然後返回一個函數。其實這個解釋是不完整的，
+
+        // 闭包可以用在许多地方。它的最大用处有两个，一个是前面提到的可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中。
+        function f1(){
+    　　　　var n=999;
+    　　　　nAdd=function(){n+=1}
+    　　　　function f2(){
+    　　　　　　alert(n);
+    　　　　}
+    　　　　return f2;
+    　　}
+
+    　　var result=f1();
+    　　result(); // 999
+    　　nAdd();
+    　　result(); // 1000
+
+        // result实际上就是闭包f2函数。它一共运行了两次，第一次的值是999，第二次的值是1000。
+        // 这证明了，函数f1中的局部变量n一直保存在内存中，并没有在f1调用后被自动清除。
+
+        // 原因就在于f1是f2的父函数，而f2被赋给了一个全局变量，这导致f2始终在内存中，
+        // 而f2的存在依赖于f1，因此f1也始终在内存中，不会在调用结束后，被垃圾回收机制（garbage collection）回收。
+
+        // nAdd前面没有使用var关键字，因此nAdd是一个全局变量，而不是局部变量。
+        // 其次，nAdd的值是一个匿名函数（anonymous function），而这个匿名函数本身也是一个闭包，所以nAdd相当于是一个setter，可以在函数外部对函数内部的局部变量进行操作。
+    
+        // 闭包会在父函数外部，改变父函数内部变量的值。
+        // 所以，如果你把父函数当作对象（object）使用，把闭包当作它的公用方法（Public Method），把内部变量当作它的私有属性（private value），
+        // 这时一定要小心，不要随便改变父函数内部变量的值。
+    </script>
+</body>
+</html>

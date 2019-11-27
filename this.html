@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function foo() {
+            console.log(this.a)
+        }
+        var a = 1
+        foo()
+        const obj = {
+            a: 2,
+            foo: foo
+        }
+        obj.foo()
+        const c = new foo()
+        
+        // 對於直接調用 foo 來說，不管 foo 函數被放在了什麼地方，this 一定是 window
+        // 對於 obj.foo() 來說，我們只需要記住，誰調用了函數，誰就是 this，所以在這個場景下 foo函數中的 this 就是 obj 對象
+        // 對於 new 的方式來說，this 被永遠綁定在了 c 上面，不會被任何方式改變 this
+
+
+        //箭头函数中的this
+        function aa() {
+            return () => {
+                return () => {
+                    console.log(this)
+                }
+            }
+        }
+        console.log(aa()()())
+        // 首先箭頭函數其實是沒有 this 的，箭頭函數中的 this 只取決包裹箭頭函數的第一個普通函數的 this。
+        // 在這個例子中，因為包裹箭頭函數的第一個普通函數是 a，所以此時的 this 是 window。另外對箭頭函數使用 bind 這類函數是無效的
+
+        // 首先，new 的方式優先級最高，
+        // 接下來是 bind 這些函數，
+        // 然後是 obj.foo() 這種調用方式，
+        // 最後是 foo 這種調用方式，同時，箭頭函數的 this 一旦被綁定，就不會再被任何方式所改變。
+
+        var name = "The Window";
+
+        var object = {
+    　　     name : "My Object",
+
+    　　　　 getNameFunc : function(){
+                // var that = this; 
+    　　　　　　return function(){
+                    // return that.name
+    　　　　　　　　return this.name;
+    　　　　　　};
+
+    　　　　}
+
+    　　};
+
+    　　alert(object.getNameFunc()());
+
+    </script>
+</body>
+</html>
