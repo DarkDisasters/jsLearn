@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 存放在栈内存中的简单数据段，数据大小确定，内存空间大小可以分配，是直接按值存放的，所以可以直接访问s
+        // 在我们进行赋值操作的时候，基本数据类型的赋值（=）是在内存中新开辟一段栈内存，然后再把再将值赋值到新的栈中 
+        var a = 10;
+        var b = a;
+
+        a ++ ;
+        console.log(a); // 11
+        console.log(b); // 10
+
+        // 引用类型（object）是存放在堆内存中的，变量实际上是一个存放在栈内存的指针，这个指针指向堆内存中的地址。每个空间大小不一样，要根据情况开进行特定的分配
+        // 引用类型(object)的赋值是传址。只是改变指针的指向，例如，也就是说引用类型的赋值是对象保存在栈中的地址的赋值，这样的话两个变量就指向同一个对象，因此两者之间操作互相有影响
+        var a = {}; // a保存了一个空对象的实例
+        var b = a;  // a和b都指向了这个空对象
+
+        a.name = 'jozo';
+        console.log(a.name); // 'jozo'
+        console.log(b.name); // 'jozo'
+
+        b.age = 22;
+        console.log(b.age);// 22
+        console.log(a.age);// 22
+
+        console.log(a == b);// true
+
+
+    </script>
+</body>
+</html>

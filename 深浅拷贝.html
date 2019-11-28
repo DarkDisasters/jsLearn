@@ -8,6 +8,33 @@
 </head>
 <body>
     <script>
+        // Object.assign 只會拷貝所有的屬性值到新的對象中，如果屬性值是對象的話，拷貝的是地址，所以並不是深拷貝。
+        let a = {age: 1}
+        // 另外我們還可以通過展開運算符 … 來實現淺拷貝  let b = {...a}
+        let b = Object.assign({}, a)
+        a.age = 2
+        console.log(b.age) // 1
+
+
+        ///淺拷貝只解決了第一層的問題，如果接下去的值中還有對象的話，那麼就又回到最開始的話題了，兩者享有相同的地址。要解決這個問題，我們就得使用深拷貝了
+        let a = {
+            age: 1,
+            jobs: {
+            first: 'FE'
+            }
+        }
+        let b = JSON.parse(JSON.stringify(a))
+        a.jobs.first = 'native'
+        console.log(b.jobs.first) // FE
+
+        // 該方法也是有侷限性的：
+
+        // 會忽略 undefined
+        // 會忽略 symbol
+        // 不能序列化函數
+        // 不能解決循環引用的對象
+
+        // 如果你所需拷貝的對象含有內置類型並且不包含函數，可以使用 MessageChannel
         
     </script>
 </body>
